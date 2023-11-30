@@ -73092,7 +73092,7 @@ ENDSEC
 
 			this.pRenderer = new Renderer(this.renderer);
 
-			this.elRoot.i18n();
+			//this.elRoot.i18n(); // remove i18n call
 		}
 
 		initListeners () {
@@ -75948,7 +75948,7 @@ ENDSEC
 			</div>
 		`);
 
-			panel.i18n();
+			//panel.i18n(); // Remove i18 function call
 			this.container.append(panel);
 
 			{ // POINT SIZE
@@ -79261,7 +79261,7 @@ ENDSEC
 			<img src="${icon}"
 				style="width: 32px; height: 32px"
 				class="button-icon"
-				data-i18n="${title}" />
+				 />
 		`);
 
 			element.click(callback);
@@ -89257,17 +89257,6 @@ ENDSEC
 				this.mapView = new MapView(this);
 				this.mapView.init();
 
-				i18n.init({
-					lng: 'en',
-					resGetPath: Potree.resourcePath + '/lang/__lng__/__ns__.json',
-					preload: ['en', 'fr', 'de', 'jp', 'se', 'es', 'zh', 'it','ca'],
-					getAsync: true,
-					debug: false
-				}, function (t) {
-					// Start translation once everything is loaded
-					$('body').i18n();
-				});
-
 				$(() => {
 					//initSidebar(this);
 					let sidebar = new Sidebar(this);
@@ -89310,11 +89299,6 @@ ENDSEC
 			});
 
 			return this.promiseGuiLoaded();
-		}
-
-		setLanguage (lang) {
-			i18n.setLng(lang);
-			$('body').i18n();
 		}
 
 		setServer (server) {
