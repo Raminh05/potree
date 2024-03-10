@@ -89198,27 +89198,8 @@ ENDSEC
 			let viewer = this;
 			let sidebarContainer = $('#potree_sidebar_container');
 			sidebarContainer.load(new URL(Potree.scriptPath + '/sidebar.html').href, () => {
-				sidebarContainer.css('width', '300px');
-				sidebarContainer.css('height', '100%');
-
-				let imgMenuToggle = document.createElement('img');
-				imgMenuToggle.src = new URL(Potree.resourcePath + '/icons/menu_button.svg').href;
-				imgMenuToggle.onclick = this.toggleSidebar;
-				imgMenuToggle.classList.add('potree_menu_toggle');
-
-				let imgMapToggle = document.createElement('img');
-				imgMapToggle.src = new URL(Potree.resourcePath + '/icons/map_icon.png').href;
-				imgMapToggle.style.display = 'none';
-				imgMapToggle.onclick = e => { this.toggleMap(); };
-				imgMapToggle.id = 'potree_map_toggle';
-
 				
-
 				let elButtons = $("#potree_quick_buttons").get(0);
-
-				elButtons.append(imgMenuToggle);
-				elButtons.append(imgMapToggle);
-
 
 				VRButton.createButton(this.renderer).then(vrButton => {
 
@@ -89253,51 +89234,7 @@ ENDSEC
 						this.dispatchEvent({type: "vr_end"});
 					});
 				});
-
-				this.mapView = new MapView(this);
-				this.mapView.init();
-
-				$(() => {
-					//initSidebar(this);
-					let sidebar = new Sidebar(this);
-					sidebar.init();
-
-					this.sidebar = sidebar;
-
-					//if (callback) {
-					//	$(callback);
-					//}
-
-					let elProfile = $('<div>').load(new URL(Potree.scriptPath + '/profile.html').href, () => {
-						$(document.body).append(elProfile.children());
-						this.profileWindow = new ProfileWindow(this);
-						this.profileWindowController = new ProfileWindowController(this);
-
-						$('#profile_window').draggable({
-							handle: $('#profile_titlebar'),
-							containment: $(document.body)
-						});
-						$('#profile_window').resizable({
-							containment: $(document.body),
-							handles: 'n, e, s, w'
-						});
-
-						$(() => {
-							this.guiLoaded = true;
-							for(let task of this.guiLoadTasks){
-								task();
-							}
-
-						});
-					});
-
-					
-
-				});
-
-				
 			});
-
 			return this.promiseGuiLoaded();
 		}
 
